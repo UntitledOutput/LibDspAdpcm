@@ -135,9 +135,17 @@ namespace DspAdpcm.Cli
                 Adpcm.SetLoop(false);
             }
 
-            if (options.Loop && outCodec == AudioCodec.Adpcm)
-            {
+            if (options.NoLoop && outCodec == AudioCodec.Pcm) {
+                Pcm.SetLoop(false);
+            }
+
+            if (options.Loop && outCodec == AudioCodec.Adpcm) {
                 Adpcm.SetLoop(options.LoopStart, options.LoopEnd);
+            }
+
+            if (options.Loop && outCodec == AudioCodec.Pcm)
+            {
+                Pcm.SetLoop(options.LoopStart, options.LoopEnd);
             }
         }
     }

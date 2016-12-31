@@ -59,7 +59,18 @@ namespace DspAdpcm.Pcm
         }
 
         /// <summary>
-        /// Sets the loop points for the <see cref="AdpcmStream"/>.
+        /// Sets the loop points for the <see cref="PcmStream"/>.
+        /// </summary>
+        /// <param name="loop">If <c>false</c>, don't loop the <see cref="PcmStream"/>
+        /// If <c>true</c>, loop the <see cref="PcmStream"/> from 0 to <see cref="NumSamples"/></param>
+        public void SetLoop(bool loop) {
+            Looping = loop;
+            LoopStart = 0;
+            LoopEnd = loop ? NumSamples : 0;
+        }
+
+        /// <summary>
+        /// Sets the loop points for the <see cref="PcmStream"/>.
         /// </summary>
         /// <param name="loopStart">The start loop point in samples.</param>
         /// <param name="loopEnd">The end loop point in samples.</param>

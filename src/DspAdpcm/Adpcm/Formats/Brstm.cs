@@ -72,7 +72,7 @@ namespace DspAdpcm.Adpcm.Formats
         private BrstmTrackType HeaderType => Configuration.TrackType;
         private int TrackInfoSize => HeaderType == BrstmTrackType.Short ? 4 : 0x0c;
         private int HeadChunk3Size => 4 + (8 * NumChannels) + (ChannelInfoSize * NumChannels);
-        private int ChannelInfoSize => 0x38;
+        private int ChannelInfoSize => 8;
 
         private int DataChunkOffset => RstmHeaderSize + HeadChunkSize;
         private int DataChunkSize => 0x20 + AudioDataSize * NumChannels;
@@ -212,6 +212,8 @@ namespace DspAdpcm.Adpcm.Formats
             writer.Write((short)2); // NumEntries
             writer.Write(HeadChunkOffset);
             writer.Write(HeadChunkSize);
+            writer.Write(0);
+            writer.Write(0);
             writer.Write(DataChunkOffset);
             writer.Write(DataChunkSize);
         }
