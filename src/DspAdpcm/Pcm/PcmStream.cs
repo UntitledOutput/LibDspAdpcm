@@ -25,6 +25,20 @@ namespace DspAdpcm.Pcm
         /// </summary>
         public int SampleRate { get; set; }
 
+        /// <summary>
+        /// The loop start point in samples.
+        /// </summary>
+        public int LoopStart { get; internal set; }
+        /// <summary>
+        /// The loop end point in samples.
+        /// </summary>
+        public int LoopEnd { get; internal set; }
+        /// <summary>
+        /// Indicates whether the <see cref="PcmStream"/>
+        /// loops or not.
+        /// </summary>
+        public bool Looping { get; private set; }
+
         internal List<PcmChannel> Channels { get; set; } = new List<PcmChannel>();
 
         /// <summary>
@@ -42,6 +56,32 @@ namespace DspAdpcm.Pcm
         {
             NumSamples = numSamples;
             SampleRate = sampleRate;
+        }
+
+        /// <summary>
+        /// Sets the loop points for the <see cref="AdpcmStream"/>.
+        /// </summary>
+        /// <param name="loopStart">The start loop point in samples.</param>
+        /// <param name="loopEnd">The end loop point in samples.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the
+        /// specified <paramref name="loopStart"/> or <paramref name="loopEnd"/>
+        /// are invalid./></exception>
+        public void SetLoop(int loopStart, int loopEnd) {
+            if (loopStart < 0 || loopStart > NumSamples) {
+                throw new ArgumentOutOfRangeException(nameof(loopStart), loopStart, "Loop points must be less than the number of samples and non-negative.");
+            }
+
+            if (loopEnd < 0 || loopEnd > NumSamples) {
+                throw new ArgumentOutOfRangeException(nameof(loopEnd), loopEnd, "Loop points must be less than the number of samples and non-negative.");
+            }
+
+            if (loopEnd < loopStart) {
+                throw new ArgumentOutOfRangeException(nameof(loopEnd), loopEnd, "The loop end must be greater than the loop start");
+            }
+
+            Looping = true;
+            LoopStart = loopStart;
+            LoopEnd = loopEnd;
         }
 
         /// <summary>
@@ -130,6 +170,9 @@ namespace DspAdpcm.Pcm
             return
                 item.NumSamples == NumSamples &&
                 item.SampleRate == SampleRate &&
+                item.LoopStart == LoopStart &&
+                item.LoopEnd == LoopEnd &&
+                item.Looping == Looping &&
                 ArraysEqual(item.Channels.ToArray(), Channels.ToArray());
         }
 
@@ -143,6 +186,9 @@ namespace DspAdpcm.Pcm
             {
                 int hashCode = NumSamples.GetHashCode();
                 hashCode = (hashCode * 397) ^ SampleRate.GetHashCode();
+                hashCode = (hashCode * 397) ^ LoopStart.GetHashCode();
+                hashCode = (hashCode * 397) ^ LoopEnd.GetHashCode();
+                hashCode = (hashCode * 397) ^ Looping.GetHashCode();
                 hashCode = (hashCode * 397) ^ Channels.GetHashCode();
                 return hashCode;
             }

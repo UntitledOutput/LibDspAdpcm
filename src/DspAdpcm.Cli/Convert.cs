@@ -58,7 +58,7 @@ namespace DspAdpcm.Cli
                         break;
                     case FileType.Brstm:
                         var brstm = new Brstm(stream);
-                        file.Adpcm = brstm.AudioStream;
+                        file.Pcm = brstm.AudioStream;
                         Configuration = brstm.Configuration;
                         break;
                     case FileType.Bcstm:
@@ -96,7 +96,7 @@ namespace DspAdpcm.Cli
                         new Idsp(Adpcm, Configuration as IdspConfiguration).WriteFile(stream);
                         break;
                     case FileType.Brstm:
-                        new Brstm(Adpcm, Configuration as BrstmConfiguration).WriteFile(stream);
+                        new Brstm(Pcm, Configuration as BrstmConfiguration).WriteFile(stream);
                         break;
                     case FileType.Bcstm:
                         new Bcstm(Adpcm, Configuration as BcstmConfiguration).WriteFile(stream);

@@ -56,6 +56,7 @@
     <Compile Include="Adpcm\Formats\Bfstm.cs" />
     <Compile Include="Adpcm\Formats\Bcstm.cs" />
     <Compile Include="Adpcm\Formats\Internal\BCFstmStructure.cs" />
+    <Compile Include="Adpcm\Formats\Internal\B_stmPcm16.cs" />
     <Compile Include="Adpcm\Formats\Structures\B_stm.cs" />
     <Compile Include="Adpcm\Formats\Structures\BfstmStructure.cs" />
     <Compile Include="Adpcm\Formats\Structures\BcstmStructure.cs" />

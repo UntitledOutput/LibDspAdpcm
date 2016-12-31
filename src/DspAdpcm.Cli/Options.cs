@@ -67,7 +67,7 @@ namespace DspAdpcm.Cli
                 [FileType.Wave] = AudioCodec.Pcm,
                 [FileType.Dsp] = AudioCodec.Adpcm,
                 [FileType.Idsp] = AudioCodec.Adpcm,
-                [FileType.Brstm] = AudioCodec.Adpcm,
+                [FileType.Brstm] = AudioCodec.Pcm,
                 [FileType.Bcstm] = AudioCodec.Adpcm,
                 [FileType.Bfstm] = AudioCodec.Adpcm,
                 [FileType.Genh] = AudioCodec.Adpcm
