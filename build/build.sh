@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-sourceDir="../src"
-outDir="../bin"
+sourceDir="./src"
+outDir="./bin"
 
 rm -rf $outDir 2> /dev/null
 rm -rf $sourceDir/DspAdpcm/bin 2> /dev/null
