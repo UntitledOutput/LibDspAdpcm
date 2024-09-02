@@ -11,7 +11,7 @@
     <RootNamespace>DspAdpcm.Tests</RootNamespace>
     <AssemblyName>DspAdpcm.Tests</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
